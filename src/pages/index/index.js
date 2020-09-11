@@ -1,8 +1,9 @@
 import _ from 'lodash'
+import react from 'react'
 // import axios from 'axios'
 import './index.less'
 
-console.log(_)
+console.log(_, react)
 document.getElementById('btn').addEventListener('click', () => {
   // import('./test').then((res) => {
   //   res.default.test()

@@ -10,6 +10,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const resolve = (dir) => path.join(__dirname, `../${dir}`)
 // 将环境变量注入到前端
 const Dotenv = require('dotenv-webpack')
+// const webpack = require('webpack')
 
 const PAGES_DIR = 'src/pages'
 const STATIC_DIR = 'static'
@@ -130,7 +131,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: `${STATIC_DIR}/css/[name]-[hash:8].css`,
     }),
-    new CleanWebpackPlugin(),
     // 复制静态资源到打包目录
     new CopyWebpackPlugin({
       patterns: [
@@ -149,6 +149,12 @@ module.exports = {
       format: ' build [:bar]:percent(:elapsed seconds)',
       clear: true,
       width: 100,
+    }),
+    // new webpack.DllReferencePlugin({
+    //   manifest: path.resolve(__dirname, '../dist', 'static/dll', 'manifest.json'),
+    // }),
+    new CleanWebpackPlugin({
+      // cleanOnceBeforeBuildPatterns: ['!dll'],
     }),
   ],
   // externals: {
