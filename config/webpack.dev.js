@@ -1,7 +1,8 @@
 const webpack = require("webpack");
+const path = require('path')
 const { merge } = require("webpack-merge");
 const baseWebpackConfig = require("./webpack.base");
-
+const apiMocker = require('mocker-api')
 module.exports = merge(baseWebpackConfig, {
   mode: "development",
   watch: true,
@@ -25,5 +26,9 @@ module.exports = merge(baseWebpackConfig, {
         changeOrigin: true
       },
     },
+    before(app) {
+      // mock请求
+      apiMocker(app, path.resolve(__dirname, '../mock/index.js'))
+    }
   },
 });
