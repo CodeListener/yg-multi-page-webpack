@@ -1,5 +1,5 @@
 export default {
-    test() {
-        console.log('async test.js')
-    }
+  test() {
+    console.log('async test.js')
+  },
 }

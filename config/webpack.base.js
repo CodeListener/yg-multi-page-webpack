@@ -9,7 +9,7 @@ const resolve = (dir) => path.join(__dirname, `../${dir}`)
 const Dotenv = require('dotenv-webpack')
 const PAGES_DIR = 'src/pages'
 const STATIC_DIR = 'static'
-const getMulitPage = function () {
+const getMulitPage = () => {
   // 忽略 static | assets 目录打包
   const ignoreFiles = ['assets'].map((item) => resolve(`${PAGES_DIR}/${item}/index.js`))
   const entry = {}
@@ -89,15 +89,16 @@ module.exports = {
         test: /.jsx?$/,
         include: [resolve('src')],
         exclude: [resolve('node_modules')],
-        use: [
-          'babel-loader',
-          {
-            loader: 'eslint-loader',
-            options: {
-              fix: true,
-            },
-          },
-        ],
+        loader: 'babel-loader',
+      },
+      {
+        test: /\.js$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: [resolve('src')],
+        options: {
+          fix: true,
+        },
       },
       {
         test: /\.(png|jpg|gif|jpeg|webp|svg|eot|ttf|woff|woff2)$/,

@@ -1,16 +1,17 @@
 module.exports = {
   root: true,
-  env: {
-    browser: true,
-    es2021: true,
-  },
-  extends: ['airbnb-base', 'prettier', 'plugin:prettire/recommended'],
+  // parser: 'babel-eslint',
   parserOptions: {
-    ecmaVersion: 2018,
     parser: 'babel-eslint',
   },
-  plugins: ['prettier'],
+  env: {
+    browser: true,
+    es6: true,
+  },
+  extends: ['airbnb-base', 'plugin:prettier/recommended'],
   rules: {
-    "prettier/prettier": "error"
+    'prettier/prettier': 'error',
+    'generator-star-spacing': 'off',
+    eqeqeq: 'off',
   },
 }
