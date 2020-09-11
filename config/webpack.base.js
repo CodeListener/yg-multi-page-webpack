@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const path = require('path')
 const { glob } = require('glob')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
 const resolve = (dir) => path.join(__dirname, `../${dir}`)
 // 将环境变量注入到前端
@@ -23,7 +24,7 @@ const getMulitPage = () => {
 
   for (let idx = 0; idx < entryFiles.length; idx++) {
     const entryFile = entryFiles[idx]
-    const regexp = new RegExp(`${PAGES_DIR}\/(.*)\/index.js`)
+    const regexp = new RegExp(`${PAGES_DIR}/(.*)/index.js`)
     const match = entryFile.match(regexp)
     const pageName = match && match[1]
 
@@ -143,6 +144,11 @@ module.exports = {
     // 注入环境变量
     new Dotenv({
       path: resolve(`env/.env.${process.env.NODE_ENV}`),
+    }),
+    new ProgressBarPlugin({
+      format: ' build [:bar]:percent(:elapsed seconds)',
+      clear: true,
+      width: 100,
     }),
   ],
   resolve: {
