@@ -110,7 +110,7 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 0,
+              limit: 1024,
               esModule: false,
               outputPath: STATIC_DIR,
               name: `resources/[name]-[hash:8].[ext]`,
@@ -151,6 +151,10 @@ module.exports = {
       width: 100,
     }),
   ],
+  // externals: {
+  //   // 指定包不进行打包，直接使用script引入
+  //   lodash: '_',
+  // },
   resolve: {
     extensions: ['.json', '.js', '.jsx'],
     alias: {
