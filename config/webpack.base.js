@@ -4,24 +4,25 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
 const { glob } = require("glob");
-
-const isDev = process.env.NODE_ENV === "development";
-const pagesDir = "src/pages";
-
+const resolve = (dir) => path.join(__dirname, `../${dir}`);
+// 将环境变量注入到前端
+const Dotenv = require("dotenv-webpack");
+const PAGES_DIR = "src/pages";
+const STATIC_DIR = "static";
 const getMulitPage = function () {
   // 忽略 static | assets 目录打包
-  const ignoreFiles = ["static", "assets"].map((item) =>
-    resolve(`${pagesDir}/${item}/index.js`)
+  const ignoreFiles = ["assets"].map((item) =>
+    resolve(`${PAGES_DIR}/${item}/index.js`)
   );
   const entry = {};
   const htmlWebpackPlugins = [];
-  const entryFiles = glob.sync(resolve(`${pagesDir}/*/index.js`), {
+  const entryFiles = glob.sync(resolve(`${PAGES_DIR}/*/index.js`), {
     ignore: ignoreFiles,
   });
 
   for (let idx = 0; idx < entryFiles.length; idx++) {
     const entryFile = entryFiles[idx];
-    const regexp = new RegExp(`${pagesDir}\/(.*)\/index.js`);
+    const regexp = new RegExp(`${PAGES_DIR}\/(.*)\/index.js`);
     const match = entryFile.match(regexp);
     const pageName = match && match[1];
 
@@ -29,7 +30,7 @@ const getMulitPage = function () {
 
     htmlWebpackPlugins.push(
       new HtmlWebpackPlugins({
-        template: resolve(`${pagesDir}/${pageName}/index.html`),
+        template: resolve(`${PAGES_DIR}/${pageName}/index.html`),
         filename: `${pageName}.html`,
         chunks: [pageName],
         inject: true,
@@ -57,32 +58,30 @@ const getMulitPage = function () {
     htmlWebpackPlugins,
   };
 };
-
-const STATIC_DIR = "static";
-const resolve = (dir) => path.join(__dirname, `../${dir}`);
 // 获取多页面
 const { entry, htmlWebpackPlugins } = getMulitPage();
+
+// 将env文件注入node环境变量中
+require('dotenv').config({
+  path: resolve(`env/.env.${process.env.NODE_ENV}`)
+})
 
 module.exports = {
   entry,
   output: {
     publicPath: "/",
-    path: resolve('dist'),
+    path: resolve("dist"),
     filename: `${STATIC_DIR}/js/[name]-[hash:8].js`,
   },
   module: {
     rules: [
       {
         test: /.(c|le)ss$/,
-        include: [resolve('src')],
-        exclude: [resolve('node_modules')],
+        include: [resolve("src")],
+        exclude: [resolve("node_modules")],
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              hrm: isDev,
-              reloadAll: isDev,
-            },
           },
           "css-loader",
           "postcss-loader",
@@ -91,8 +90,8 @@ module.exports = {
       },
       {
         test: /.jsx?$/,
-        include: [resolve('src')],
-        exclude: [resolve('node_modules')],
+        include: [resolve("src")],
+        exclude: [resolve("node_modules")],
         loader: "babel-loader",
       },
       {
@@ -127,10 +126,14 @@ module.exports = {
       patterns: [
         {
           toType: "dir",
-          from: resolve('src/static'),
-          to: resolve('dist/static'),
+          from: resolve("static"),
+          to: resolve("dist/static"),
         },
       ],
+    }),
+    // 注入环境变量
+    new Dotenv({
+      path: resolve(`env/.env.${process.env.NODE_ENV}`),
     }),
   ],
   resolve: {

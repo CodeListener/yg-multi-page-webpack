@@ -1,6 +1,6 @@
 import "./index.less";
-// import a from '@/index/a'
 import lodash from 'lodash'
+import axios from 'axios'
 
 console.log(lodash)
 document.getElementById("btn").addEventListener("click", () => {
@@ -9,3 +9,11 @@ document.getElementById("btn").addEventListener("click", () => {
         res.default.test();
       });
 });
+
+axios.get('/api/common/banners', {
+}).then((res) => {
+  console.log(res)
+}).catch((res) => {
+  console.log(res)
+})
+

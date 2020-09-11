@@ -4,8 +4,11 @@
   "description": "邢帅教育-面向简单活动页面打包脚手架",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config=./config/webpack.dev.js",
-    "build": "cross-env NODE_ENV=production webpack --config=./config/webpack.prod.js"
+    "local:dev": "cross-env NODE_ENV=development webpack-dev-server --config=./config/webpack.dev.js",
+    "local:test": "cross-env NODE_ENV=test webpack-dev-server --config=./config/webpack.dev.js",
+    "local:prod": "cross-env NODE_ENV=production webpack-dev-server --config=./config/webpack.dev.js",
+    "build:test": "cross-env NODE_ENV=test webpack --config=./config/webpack.prod.js",
+    "build:prod": "cross-env NODE_ENV=production webpack --config=./config/webpack.prod.js"
   },
   "author": "yangguang",
   "license": "ISC",
@@ -20,6 +23,8 @@
     "copy-webpack-plugin": "^6.1.0",
     "cross-env": "^7.0.2",
     "css-loader": "^4.3.0",
+    "dotenv": "^8.2.0",
+    "dotenv-webpack": "^2.0.0",
     "file-loader": "^6.1.0",
     "glob": "^7.1.6",
     "html-webpack-plugin": "^4.4.1",
@@ -39,6 +44,7 @@
   "dependencies": {
     "@babel/runtime": "^7.11.2",
     "@babel/runtime-corejs3": "^7.11.2",
+    "axios": "^0.20.0",
     "loadash": "^1.0.0"
   }
 }
