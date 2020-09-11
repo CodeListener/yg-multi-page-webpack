@@ -3,9 +3,9 @@ import axios from 'axios'
 import './index.less'
 
 document.getElementById('btn').addEventListener('click', () => {
-  import('./test').then((res) => {
-    res.default.test()
-  })
+  // import('./test').then((res) => {
+  //   res.default.test()
+  // })
 })
 
 axios

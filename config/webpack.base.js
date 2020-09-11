@@ -1,12 +1,15 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const HtmlWebpackPlugins = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const path = require('path')
 const { glob } = require('glob')
+
 const resolve = (dir) => path.join(__dirname, `../${dir}`)
 // 将环境变量注入到前端
 const Dotenv = require('dotenv-webpack')
+
 const PAGES_DIR = 'src/pages'
 const STATIC_DIR = 'static'
 const getMulitPage = () => {

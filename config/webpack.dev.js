@@ -1,8 +1,10 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const webpack = require('webpack')
 const path = require('path')
 const { merge } = require('webpack-merge')
-const baseWebpackConfig = require('./webpack.base')
 const apiMocker = require('mocker-api')
+const baseWebpackConfig = require('./webpack.base')
+
 module.exports = merge(baseWebpackConfig, {
   mode: 'development',
   watch: true,
