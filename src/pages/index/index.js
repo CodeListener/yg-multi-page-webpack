@@ -1,14 +1,14 @@
-import _ from 'lodash'
-import react from 'react'
+// import _ from 'lodash'
 // import axios from 'axios'
 import './index.less'
 
-console.log(_, react)
 document.getElementById('btn').addEventListener('click', () => {
   // import('./test').then((res) => {
   //   res.default.test()
   // })
 })
+
+// const el = <div>111</div>
 
 // axios
 //   .get('/user', {})
