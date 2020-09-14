@@ -1,9 +1,14 @@
 {
-  "presets": ["@babel/preset-env"],
+  "presets": [["@babel/env", {
+    // "useBuiltIns": "usage",
+    // "corejs": 3
+  }]],
   "plugins": [
+    // 帮助函数使用引用，不直接在每个文件创建帮助函数
     [
       "@babel/plugin-transform-runtime",
       {
+        // 加载 Polyfill  通过使用 @babel/runtime-corejs3
         "corejs": 3
       }
     ]
