@@ -2,6 +2,10 @@
 
 > 每次做简单项目都是直接创建 html,css,js文件一把梭，写css, js 兼容性又怕跟不上，各种麻烦，直接配置个简单打包，方便以后使用
 
+
+## PS: 创建目录建议连同index.js一起创建，因为页面可能不需要script脚本，所以可以不创建index.js，但一定pages/** 至少存在一个index.js文件，否则entry匹配不到index.js则报错
+
+
 ```
 ├── README.md
 ├── config                  // 打包配置
