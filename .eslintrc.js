@@ -19,7 +19,12 @@ module.exports = {
     'comma-dangle': ['error'],
     eqeqeq: 'off',
   },
-  // settings: {
-  //   sharedData: 'hello',
-  // },
+  settings: {
+    // 让eslint支持别名引入
+    'import/resolver': {
+      alias: {
+        map: [['@', `./src`]],
+      },
+    },
+  },
 }

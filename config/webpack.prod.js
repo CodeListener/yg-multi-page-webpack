@@ -2,6 +2,7 @@
 const { merge } = require('webpack-merge')
 const OptimizeCssPlugin = require('optimize-css-assets-webpack-plugin')
 // const TerserWebpackPlugin = require('terser-webpack-plugin')
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const baseWebpackConfig = require('./webpack.base')
 
 module.exports = merge(baseWebpackConfig, {
@@ -9,7 +10,22 @@ module.exports = merge(baseWebpackConfig, {
   plugins: [
     // 压缩css文件
     new OptimizeCssPlugin(),
+    // new BundleAnalyzerPlugin(),
   ],
+  optimization: {
+    splitChunks: {
+      // 代码切块
+      cacheGroups: {
+        vendor: {
+          priority: 1,
+          name: 'vendor',
+          chunks: 'initial',
+          minSize: 0,
+          minChunks: 1,
+        },
+      },
+    },
+  },
   // devtool: 'source-map', // 'source-map',  // "cleap-module-eval-source-map",
   // optimization: {
   //   minimizer: [

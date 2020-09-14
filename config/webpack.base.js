@@ -36,7 +36,7 @@ const getMulitPage = () => {
     const hasIndeEntry = fs.existsSync(resolve(`${PAGES_DIR}/${pageName}/index.js`))
 
     if (hasIndeEntry) {
-      entry[pageName] = entryFile
+      entry[pageName] = resolve(`${PAGES_DIR}/${pageName}/index.js`)
     }
 
     htmlWebpackPlugins.push(
@@ -159,7 +159,7 @@ module.exports = {
               limit: 1024,
               esModule: false,
               outputPath: STATIC_DIR,
-              name: `resources/[name]-[hash:8].[ext]`,
+              name: `[folder]/[name]-[hash:8].[ext]`,
             },
           },
         ],
@@ -180,7 +180,6 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          toType: 'dir',
           from: resolve('static'),
           to: resolve('dist/static'),
         },
