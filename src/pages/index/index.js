@@ -1,6 +1,6 @@
+import { getBanner } from '@/apis/user'
 import './index.less'
 
-function test() {
-  console.log(new Set())
-}
-test()
+getBanner().then((res) => {
+  console.log(res)
+})

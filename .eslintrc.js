@@ -23,7 +23,7 @@ module.exports = {
     // 让eslint支持别名引入
     'import/resolver': {
       alias: {
-        map: [['@', `./src`]],
+        map: [['@', './src']],
       },
     },
   },
