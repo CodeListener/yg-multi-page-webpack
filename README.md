@@ -26,8 +26,10 @@
 ├── package.json
 ├── postcss.config.js
 ├── src
-│   ├── assets
-│   └── pages               // 页面入口
+    ├── apis                // 接口
+    ├── assets              // 资源
+    ├── pages               // 页面入口
+    └── utils               // 工具
 └── static                  // 静态资源
 ```
 
