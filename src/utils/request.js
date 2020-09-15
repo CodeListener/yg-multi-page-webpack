@@ -16,7 +16,7 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (response) => {
-    if (response.data.code === 0) {
+    if (response.data.code === 1) {
       return Promise.resolve(response.data)
     }
     console.error(`接口：${response.config.url} 请求错误`, response.data)
@@ -27,58 +27,58 @@ instance.interceptors.response.use(
     if (error && error.response) {
       switch (error.response.status) {
         case 400:
-          error.message = '请求错误'
+          error.message = `${error.response.config.url}: 请求错误`
           break
 
         case 401:
-          error.message = '未授权，请登录'
+          error.message = `${error.response.config.url}: 未授权，请登录`
           break
 
         case 403:
-          error.message = '拒绝访问'
+          error.message = `${error.response.config.url}: 拒绝访问`
           break
 
         case 404:
-          error.message = `请求地址出错: ${error.response.config.url}`
+          error.message = `${error.response.config.url}: 请求地址出错`
           break
 
         case 408:
-          error.message = '请求超时'
+          error.message = `${error.response.config.url}: 请求超时`
           break
 
         case 500:
-          error.message = '服务器内部错误'
+          error.message = `${error.response.config.url}: 服务器内部错误`
           break
 
         case 501:
-          error.message = '服务未实现'
+          error.message = `${error.response.config.url}: 服务未实现`
           break
 
         case 502:
-          error.message = '网关错误'
+          error.message = `${error.response.config.url}: 网关错误`
           break
 
         case 503:
-          error.message = '服务不可用'
+          error.message = `${error.response.config.url}: 服务不可用`
           break
 
         case 504:
-          error.message = '网关超时'
+          error.message = `${error.response.config.url}: 网关超时`
           break
 
         case 505:
-          error.message = 'HTTP版本不受支持'
+          error.message = `${error.response.config.url}: HTTP版本不受支持`
           break
 
         default:
-          error.message = '网络异常！'
+          error.message = `${error.response.config.url}: 网络异常！`
       }
       if (err.message.indexOf('timeout') >= 0) {
         error.message = '网络超时'
       }
     }
-    console.error(`接口：${error.config.url} 请求错误`, error.response)
-    return Promise.reject(err)
+    console.error(`状态码：${error.response.status} => ${error.message}`)
+    // return Promise.reject(err)
   },
 )
 
