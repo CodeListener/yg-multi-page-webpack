@@ -107,8 +107,6 @@ const getMulitPage = () => {
 // 获取多页面
 const { entry, htmlWebpackPlugins } = getMulitPage()
 
-console.log(entry)
-
 // 将env文件注入node环境变量中
 require('dotenv').config({
   path: resolve(`env/.env.${process.env.NODE_ENV}`),

@@ -13,17 +13,27 @@ module.exports = merge(baseWebpackConfig, {
     // new BundleAnalyzerPlugin(),
   ],
   optimization: {
-    splitChunks: {
+    // splitChunks: {
+    //   cacheGroups: {
+    //     react: {
+    //       test: /react/,
+    //       chunks: 'all',
+    //       priority: 1,
+    //       name: 'react',
+    //       minSize: 0,
+    //       minChunks: 1,
+    //     },
+    //   },
       // 代码切块
-      cacheGroups: {
-        vendor: {
-          priority: 1,
-          name: 'vendor',
-          chunks: 'initial',
-          minSize: 0,
-          minChunks: 1,
-        },
-      },
+      // cacheGroups: {
+      //   vendor: {
+      //     priority: 1,
+      //     name: 'vendor',
+      //     chunks: 'initial',
+      //     minSize: 0,
+      //     minChunks: 1,
+      //   },
+      // },
     },
   },
   // devtool: 'source-map', // 'source-map',  // "cleap-module-eval-source-map",
