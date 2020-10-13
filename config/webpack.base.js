@@ -205,7 +205,7 @@ module.exports = {
   //   lodash: '_',
   // },
   resolve: {
-    extensions: ['.json', '.js', '.jsx'],
+    extensions: ['.json', '.js', '.jsx', '.vue'],
     alias: {
       '@': resolve('src'),
     },
